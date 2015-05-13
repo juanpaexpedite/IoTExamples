@@ -69,7 +69,8 @@ namespace RGBLed.ViewModels
         {
             cts.Cancel();
             cts = new CancellationTokenSource();
-            MainHardwareView.SetColors(cts.Token, red == 255, green == 255, blue == 255);
+            if(MainHardwareView!=null)
+                MainHardwareView.SetColors(cts.Token, red == 255, green == 255, blue == 255);
         }
 
         #region MainHardwareView
@@ -78,10 +79,14 @@ namespace RGBLed.ViewModels
 
         public MainViewModel()
         {
+            Initialize();
+        }
+
+        private async void Initialize()
+        {
             MainHardwareView = new MainHardwareView();
+            await MainHardwareView.InitializeComponent();
             Red = 255;
-            Green = 0;
-            Blue = 0;
         }
 
 

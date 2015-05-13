@@ -18,14 +18,14 @@ namespace RGBLed.HardwareViews
         #region Constructor and Initialization
         public MainHardwareView()
         {
-            InitializeComponent();
+           
         }
 
-        private async void InitializeComponent()
+        public async Task<bool> InitializeComponent()
         {
             var devicefamily = GetForCurrentView().QualifierValues["DeviceFamily"];
             if (devicefamily != "Universal")
-                return;
+                return false;
 
             var controller = GpioController.GetDefault();
 
@@ -37,14 +37,12 @@ namespace RGBLed.HardwareViews
             else
             {
                 Status = GpioStatus.Initialized;
-                await Task.Delay(1000);
+                await Task.Delay(100);
                 GpioController = controller;
                 Status = InitializePins();
-                if (Status == GpioStatus.Success)
-                {
-                    InitializeLoop();
-                }
             }
+
+            return true;
         }
         #endregion
 
@@ -110,14 +108,13 @@ namespace RGBLed.HardwareViews
         }
         #endregion
 
-        public void InitializeLoop()
-        {
-            //Timer timer = new Timer(OnTick, null, 100, 100);
-        }
-
+        #region Colors
+        private bool RedOn = false;
+        private bool GreenOn = false;
+        private bool BlueOn = false;
         public async void SetColors(CancellationToken token, bool red, bool green, bool blue)
         {
-            await Task.Delay(1000);
+            await Task.Delay(500);
 
             if (!token.IsCancellationRequested)
             {
@@ -128,26 +125,7 @@ namespace RGBLed.HardwareViews
                 BluePin.Write(BlueOn ? GpioPinValue.High : GpioPinValue.Low);
             }
         }
-
-        #region Red
-        public bool RedOn = false;
-
         #endregion
 
-        #region Green
-        public bool GreenOn = false;
-        #endregion
-
-        #region Blue
-        public bool BlueOn = false;
-        #endregion
-
-        //public void OnTick(object state)
-        //{
-        //    RedPin.Write(RedOn ? GpioPinValue.High : GpioPinValue.Low);
-        //    GreenPin.Write(GreenOn ? GpioPinValue.High : GpioPinValue.Low);
-        //    BluePin.Write(BlueOn ? GpioPinValue.High : GpioPinValue.Low);
-           
-        //}
     }
 }

@@ -26,12 +26,5 @@ namespace RGBLed.Views
         {
             this.InitializeComponent();
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            RedSlider.GetBindingExpression(Slider.ValueProperty).UpdateSource();
-            GreenSlider.GetBindingExpression(Slider.ValueProperty).UpdateSource();
-            BlueSlider.GetBindingExpression(Slider.ValueProperty).UpdateSource();
-        }
     }
 }
