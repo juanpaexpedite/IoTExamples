@@ -79,17 +79,21 @@ namespace RGBLed.HardwareViews
         public GpioPin GreenPin;
         public GpioPin BluePin;
 
+        public Int32 RedPinName { get; set; }
+        public Int32 GreenPinName { get; set; }
+        public Int32 BluePinName { get; set; }
+
         public GpioStatus InitializePins()
         {
-            RedPin = InitPin(18);
+            RedPin = InitPin(RedPinName);
             if (RedPin == null)
                 return GpioStatus.NoPin;
 
-            GreenPin = InitPin(23);
+            GreenPin = InitPin(GreenPinName);
             if (GreenPin == null)
                 return GpioStatus.NoPin;
 
-            BluePin = InitPin(24);
+            BluePin = InitPin(BluePinName);
             if (BluePin == null)
                 return GpioStatus.NoPin;
 

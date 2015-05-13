@@ -1,4 +1,5 @@
-﻿using RGBLed.HardwareViews;
+﻿using RGBLed.Common;
+using RGBLed.HardwareViews;
 using RGBLed.Models;
 using RGBLed.ViewModels.Base;
 using System;
@@ -14,7 +15,7 @@ namespace RGBLed.ViewModels
     public class MainViewModel : ViewModel
     {
         #region Led
-        private RGBLedModel led = new RGBLedModel();
+        private RGBLedModel led = new RGBLedModel() { RedPin = 18, GreenPin = 23, BluePin = 24 };
 
         public RGBLedModel Led
         {
@@ -69,7 +70,7 @@ namespace RGBLed.ViewModels
         {
             cts.Cancel();
             cts = new CancellationTokenSource();
-            if(MainHardwareView!=null)
+            if(MainHardwareView.Status == GpioStatus.Success)
                 MainHardwareView.SetColors(cts.Token, red == 255, green == 255, blue == 255);
         }
 
@@ -85,8 +86,15 @@ namespace RGBLed.ViewModels
         private async void Initialize()
         {
             MainHardwareView = new MainHardwareView();
-            await MainHardwareView.InitializeComponent();
-            Red = 255;
+
+            MainHardwareView.RedPinName = Led.RedPin;
+            MainHardwareView.GreenPinName = Led.GreenPin;
+            MainHardwareView.BluePinName = Led.BluePin;
+
+            if (await MainHardwareView.InitializeComponent())
+            {
+                Red = 255;
+            }
         }
 
 
