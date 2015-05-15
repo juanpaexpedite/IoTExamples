@@ -1,0 +1,50 @@
+﻿<Page
+    x:Class="BasicThermometer.Views.MainView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BasicThermometer.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm ="using:BasicThermometer.ViewModels"
+    mc:Ignorable="d">
+    <Page.DataContext>
+        <vm:MainViewModel/>
+    </Page.DataContext>
+    
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <!--<Ellipse Stroke="White" Width="100" Height="100" Margin="10">
+                <Ellipse.Fill>
+                    <SolidColorBrush Color="{Binding Led.Color}"/>
+                </Ellipse.Fill>
+            </Ellipse>-->
+            
+            
+            <ScrollViewer Height="400">
+                <ItemsControl ItemsSource="{Binding Values}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Key}" />
+                                <TextBlock Margin="6,0,0,0" Text="{Binding Val}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+            
+            <!--<Slider Width="200" Minimum="0" Value="{Binding Red, Mode=TwoWay}" Maximum="255" LargeChange="100" SmallChange="10" Margin="10" StepFrequency="10"/>
+            <Slider Width="200" Minimum="0" Value="{Binding Green, Mode=TwoWay}" Maximum="255" LargeChange="100" SmallChange="10" Margin="10" StepFrequency="10"/>
+            <Slider Width="200" Minimum="0" Value="{Binding Blue, Mode=TwoWay}" Maximum="255" LargeChange="100" SmallChange="10" Margin="10" StepFrequency="10"/>-->
+            <TextBlock Foreground="Purple" Text="{Binding Thermometer.Temperature}" Margin="10,50,10,10" TextAlignment="Center" FontSize="26.667" />
+            <TextBlock Foreground="Blue" Text="{Binding Thermometer.AverageTemperature}" Margin="10,50,10,10" TextAlignment="Center" FontSize="26.667" />
+            <TextBlock Foreground="Orange" Text="{Binding Thermometer.Linear}" Margin="10,50,10,10" TextAlignment="Center" FontSize="26.667" />
+            
+
+            <TextBlock Text="{Binding MainHardwareView.Status}" Margin="10,50,10,10" TextAlignment="Center" FontSize="26.667" />
+
+            
+        </StackPanel>
+    </Grid>
+</Page>
