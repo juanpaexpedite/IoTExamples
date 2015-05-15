@@ -148,6 +148,7 @@ namespace BasicThermometer.HardwareViews
         #endregion
 
 
+
         #region Capacitor
         public async Task<double> Recharge()
         {
