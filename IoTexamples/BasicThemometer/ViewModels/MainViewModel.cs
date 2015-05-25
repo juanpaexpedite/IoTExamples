@@ -1,4 +1,5 @@
-﻿using BasicThemometer.Models;
+﻿using BasicThemometer.HardwareViews;
+using BasicThemometer.Models;
 using BasicThermometer.Common;
 using BasicThermometer.HardwareViews;
 using BasicThermometer.Models;
@@ -26,10 +27,12 @@ namespace BasicThermometer.ViewModels
             get { return thermometer; }
             set { if (thermometer != value) { thermometer = value; NotifyPropertyChanged(); } }
         }
+
+        public Thermistor Thermistor = new Thermistor(0.00288301, -0.00002028, 0.00000190);
         #endregion
 
         #region MainHardwareView
-        public MainHardwareView MainHardwareView { get; set; }
+        public SingleResistorView MainHardwareView { get; set; }
         #endregion
 
         public MainViewModel()
@@ -43,34 +46,38 @@ namespace BasicThermometer.ViewModels
         double last = -1;
         private async void Initialize()
         {
-            MainHardwareView = new MainHardwareView();
-            MainHardwareView.FirstPin = Thermometer.FirstPin;
-            MainHardwareView.SecondPin = Thermometer.SecondPin;
+            MainHardwareView = new SingleResistorView();
+            MainHardwareView.Pin = Thermometer.FirstPin;
+            MainHardwareView.ReadPin = Thermometer.SecondPin;
+            MainHardwareView.Update = Refresh;
+
 
             if (await MainHardwareView.InitializeComponent())
             {
-                MainHardwareView.Initialize();
-
-                DispatcherTimer timer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(100) };
-                timer.Tick += (s, t) =>
-                {
-                    Thermometer.Temperature =  MainHardwareView.Temperature;
-
-                    Thermometer.AverageTemperature = MainHardwareView.AverageTemperature;
-                    Thermometer.Linear = MainHardwareView.Linear;
-
-                    if (last != Thermometer.Linear)
-                    {
-                        Values.Add(new Value { Key = Thermometer.AverageTemperature.ToString(), Val = Thermometer.Linear.ToString() });
-                        last = Thermometer.Linear;
-                    }
-
-                };
-                timer.Start();
-
-               
+                MainHardwareView.Specific();
             }
         }
+
+        int i = 0;
+        double average = 0;
+        int times = 40;
+        public Action<double> Refresh => (value) =>
+        {
+            Thermistor.Resistance = RCCircuit.GetResistor(value);
+            Thermometer.Temperature = Thermistor.GetTemperatureCelsius();
+
+            average += Thermometer.Temperature;
+
+            if (++i > (times-1))
+            {
+                average = average / times;
+                Values.Insert(0,new Value { Key = "average", Val = average.ToString() });
+                average = 0;
+                i = 0;
+            }
+
+        };
+
 
         public class Value
         {

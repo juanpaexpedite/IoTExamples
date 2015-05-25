@@ -97,6 +97,9 @@
     <Compile Include="Common\GpioStatus.cs" />
     <Compile Include="HardwareViews\Base\HardwareView.cs" />
     <Compile Include="HardwareViews\MainHardwareView.cs" />
+    <Compile Include="HardwareViews\SecondHardwareView.cs" />
+    <Compile Include="HardwareViews\SingleGpioView.cs" />
+    <Compile Include="HardwareViews\SingleResistorView.cs" />
     <Compile Include="Models\Base\Model.cs" />
     <Compile Include="Models\ThermometerModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

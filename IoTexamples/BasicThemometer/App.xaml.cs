@@ -47,6 +47,9 @@ namespace BasicThemometer
         /// will be used such as when the application is launched to open a specific file.
         /// </summary>
         /// <param name="e">Details about the launch request and process.</param>
+        /// 
+
+        public static Frame rootFrame;
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
 
@@ -57,7 +60,7 @@ namespace BasicThemometer
             }
 #endif
 
-            Frame rootFrame = Window.Current.Content as Frame;
+            rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active

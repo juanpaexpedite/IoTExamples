@@ -1,16 +1,18 @@
-﻿using System;
+﻿using BasicThemometer;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml;
 
 namespace BasicThermometer.Models.Base
 {
     public class Model : INotifyPropertyChanged
     {
-        public void NotifyPropertyChanged([CallerMemberName] string caller = "")
+        public async void NotifyPropertyChanged([CallerMemberName] string caller = "")
         {
             if (PropertyChanged != null)
             {
