@@ -2,10 +2,13 @@
 using HardwareViews.Base;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Windows.Devices.Gpio;
+using Windows.Foundation;
 using static Windows.ApplicationModel.Resources.Core.ResourceContext;
 
 namespace FanMotor.HardwareViews
@@ -116,7 +119,18 @@ namespace FanMotor.HardwareViews
 
         public void Specific()
         {
-            Loop();
+            //Loop();
+
+            SoftwarePWMLoop();
+        }
+
+        private async void SoftwarePWMLoop()
+        {
+            Forward();
+            await Task.Delay(1);
+            Stop();
+            await Task.Delay(190);
+            SoftwarePWMLoop();
         }
 
         private async void Loop()
@@ -150,4 +164,6 @@ namespace FanMotor.HardwareViews
             SecondGpio.Write(GpioPinValue.High);
         }
     }
+
+
 }
