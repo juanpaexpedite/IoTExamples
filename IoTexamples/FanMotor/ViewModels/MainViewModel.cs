@@ -16,19 +16,8 @@ namespace FanMotor.ViewModels
 {
     public class MainViewModel : ViewModel
     {
-        #region Fan
-        private FanModel fan = new FanModel() { FirstPin = 18, SecondPin= 23};
-
-        public FanModel Fan
-        {
-            get { return fan; }
-            set { if (fan != value) { fan = value; NotifyPropertyChanged(); } }
-        }
-
-        #endregion
-
         #region MainHardwareView
-        public MainHardwareView MainHardwareView { get; set; }
+        public MainHardware MainHardwareView { get; set; }
         #endregion
 
         public MainViewModel()
@@ -38,9 +27,7 @@ namespace FanMotor.ViewModels
 
         private async void Initialize()
         {
-            MainHardwareView = new MainHardwareView();
-            MainHardwareView.FirstPin = Fan.FirstPin;
-            MainHardwareView.SecondPin = Fan.SecondPin;
+            MainHardwareView = new MainHardware(new int[] { 18, 23 });
 
             if (await MainHardwareView.InitializeComponent())
             {

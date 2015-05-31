@@ -13,115 +13,24 @@ using static Windows.ApplicationModel.Resources.Core.ResourceContext;
 
 namespace FanMotor.HardwareViews
 {
-    public class MainHardwareView : HardwareView
+    public class MainHardware : Hardware
     {
-        #region Standard Implementation
-        public MainHardwareView()
-        {
-
-        }
-
-        #region Status
-        public GpioStatus status = GpioStatus.Default;
-        public GpioStatus Status
-        {
-            get { return status; }
-            set { if (status != value) { status = value; NotifyPropertyChanged(); } }
-        }
-        #endregion
-
-        #region Controller
-        private GpioController gpiocontroller;
-        public GpioController GpioController
-        {
-            get
-            {
-                return gpiocontroller;
-            }
-            set
-            {
-                if (gpiocontroller != value)
-                {
-                    gpiocontroller = value;
-                    NotifyPropertyChanged();
-                }
-            }
-        }
-        #endregion
-
         #region Gpios and Pins
-        public GpioPin FirstGpio;
-        public GpioPin SecondGpio;
-        public Int32 FirstPin { get; set; }
-        public Int32 SecondPin { get; set; }
-
-
-        public GpioStatus InitializeGpios()
-        {
-            FirstGpio = InitGpioOutput(FirstPin);
-            if (FirstGpio == null)
-                return GpioStatus.NoPin;
-
-            SecondGpio = InitGpioOutput(SecondPin);
-            if (SecondGpio == null)
-                return GpioStatus.NoPin;
-
-            return GpioStatus.Success;
-        }
-
-        public GpioPin InitGpioOutput(int PIN)
-        {
-            var pin = GpioController.OpenPin(PIN);
-            pin.SetDriveMode(GpioPinDriveMode.Output);
-            pin.Write(GpioPinValue.Low);
-
-            return pin;
-        }
-
-        public GpioPin InitGpioInput(int PIN)
-        {
-            var pin = GpioController.OpenPin(PIN);
-            pin.SetDriveMode(GpioPinDriveMode.Input);
-            return pin;
-        }
-        #endregion
-
-
-        public async Task<bool> InitializeComponent()
-        {
-            var devicefamily = GetForCurrentView().QualifierValues["DeviceFamily"];
-            if (devicefamily != "Universal")
-                return false;
-
-            var controller = GpioController.GetDefault();
-
-            if (controller == null)
-            {
-                FirstGpio = null;
-                SecondGpio = null;
-                Status = GpioStatus.NoGPIO;
-            }
-            else
-            {
-                Status = GpioStatus.Initialized;
-                await Task.Delay(200);
-                GpioController = controller;
-                Status = InitializeGpios();
-                await Task.Delay(200);
-            }
-
-            Specific();
-
-            return true;
-        }
+        public GpioPin FirstGpio => Gpios[0];
+        public GpioPin SecondGpio => Gpios[1];
 
         #endregion Standard Implementation
 
+        public MainHardware(Int32[] pins) : base(pins)
+        {
+
+        }
+
         public void Specific()
         {
-            //Loop();
+            Loop();
 
-            SoftwarePWMLoop();
+            //SoftwarePWMLoop();
         }
 
         private async void SoftwarePWMLoop()
