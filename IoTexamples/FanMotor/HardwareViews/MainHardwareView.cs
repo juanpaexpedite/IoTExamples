@@ -19,12 +19,11 @@ namespace FanMotor.HardwareViews
         public GpioPin FirstGpio => Gpios[0];
         public GpioPin SecondGpio => Gpios[1];
 
-        #endregion Standard Implementation
-
         public MainHardware(Int32[] pins) : base(pins)
         {
 
         }
+        #endregion Standard Implementation
 
         public void Specific()
         {

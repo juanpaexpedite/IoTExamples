@@ -98,7 +98,6 @@
     <Compile Include="HardwareViews\Base\HardwareView.cs" />
     <Compile Include="HardwareViews\MainHardwareView.cs" />
     <Compile Include="Models\Base\Model.cs" />
-    <Compile Include="Models\FanModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\Base\ViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
