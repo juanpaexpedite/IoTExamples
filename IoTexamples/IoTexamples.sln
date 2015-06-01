@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicThemometer", "BasicThe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FanMotor", "FanMotor\FanMotor.csproj", "{546886C0-6869-4668-9240-B42B0FBD7066}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Potentiometer", "Potentiometer\Potentiometer.csproj", "{304ACDB0-40A6-4942-8D1E-D56CA5525E47}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM = Debug|ARM
@@ -78,6 +80,24 @@ Global
 		{546886C0-6869-4668-9240-B42B0FBD7066}.Release|x86.ActiveCfg = Release|x86
 		{546886C0-6869-4668-9240-B42B0FBD7066}.Release|x86.Build.0 = Release|x86
 		{546886C0-6869-4668-9240-B42B0FBD7066}.Release|x86.Deploy.0 = Release|x86
+		{304ACDB0-40A6-4942-8D1E-D56CA5525E47}.Debug|ARM.ActiveCfg = Debug|ARM
+		{304ACDB0-40A6-4942-8D1E-D56CA5525E47}.Debug|ARM.Build.0 = Debug|ARM
+		{304ACDB0-40A6-4942-8D1E-D56CA5525E47}.Debug|ARM.Deploy.0 = Debug|ARM
+		{304ACDB0-40A6-4942-8D1E-D56CA5525E47}.Debug|x64.ActiveCfg = Debug|x64
+		{304ACDB0-40A6-4942-8D1E-D56CA5525E47}.Debug|x64.Build.0 = Debug|x64
+		{304ACDB0-40A6-4942-8D1E-D56CA5525E47}.Debug|x64.Deploy.0 = Debug|x64
+		{304ACDB0-40A6-4942-8D1E-D56CA5525E47}.Debug|x86.ActiveCfg = Debug|x86
+		{304ACDB0-40A6-4942-8D1E-D56CA5525E47}.Debug|x86.Build.0 = Debug|x86
+		{304ACDB0-40A6-4942-8D1E-D56CA5525E47}.Debug|x86.Deploy.0 = Debug|x86
+		{304ACDB0-40A6-4942-8D1E-D56CA5525E47}.Release|ARM.ActiveCfg = Release|ARM
+		{304ACDB0-40A6-4942-8D1E-D56CA5525E47}.Release|ARM.Build.0 = Release|ARM
+		{304ACDB0-40A6-4942-8D1E-D56CA5525E47}.Release|ARM.Deploy.0 = Release|ARM
+		{304ACDB0-40A6-4942-8D1E-D56CA5525E47}.Release|x64.ActiveCfg = Release|x64
+		{304ACDB0-40A6-4942-8D1E-D56CA5525E47}.Release|x64.Build.0 = Release|x64
+		{304ACDB0-40A6-4942-8D1E-D56CA5525E47}.Release|x64.Deploy.0 = Release|x64
+		{304ACDB0-40A6-4942-8D1E-D56CA5525E47}.Release|x86.ActiveCfg = Release|x86
+		{304ACDB0-40A6-4942-8D1E-D56CA5525E47}.Release|x86.Build.0 = Release|x86
+		{304ACDB0-40A6-4942-8D1E-D56CA5525E47}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
