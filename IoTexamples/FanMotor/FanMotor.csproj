@@ -95,12 +95,13 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\GpioStatus.cs" />
-    <Compile Include="HardwareViews\Base\HardwareView.cs" />
-    <Compile Include="HardwareViews\MainHardwareView.cs" />
+    <Compile Include="Hardwares\Base\Hardware.cs" />
+    <Compile Include="Hardwares\FanMotorHardware.cs" />
+    <Compile Include="Hardwares\LedHardware.cs" />
     <Compile Include="Models\Base\Model.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\Base\ViewModel.cs" />
-    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewHardwares\Base\ViewHardware.cs" />
+    <Compile Include="ViewHardwares\MainViewHardware.cs" />
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>

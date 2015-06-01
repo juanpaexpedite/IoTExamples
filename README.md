@@ -26,5 +26,5 @@ Using a capacitor and two GPIOS you can measure the changes of the resistance of
 
 In this case you can connect directly to the raspberry Pi 2 this L9110 (controller chip) Fan Motor and make the motor forward, reverse and stop just by setting GPIOs high and low
 
-I have improved the code to implement Hardware HVVH pattern. 
+I have improved the code to implement Hardware HVVH pattern, in order to make a base to implement scalable hardware views
 

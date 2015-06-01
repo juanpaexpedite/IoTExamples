@@ -6,9 +6,9 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ViewModels.Base
+namespace ViewHardwares.Base
 {
-    public class ViewModel : INotifyPropertyChanged
+    public class ViewHardware : INotifyPropertyChanged
     {
         public void NotifyPropertyChanged([CallerMemberName] string caller = "")
         {

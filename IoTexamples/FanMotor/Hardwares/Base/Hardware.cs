@@ -10,21 +10,32 @@ using Windows.Devices.Gpio;
 using static Windows.ApplicationModel.Resources.Core.ResourceContext;
 using System.Reflection;
 
-namespace HardwareViews.Base
+namespace Hardwares.Base
 {
     public class Hardware : INotifyPropertyChanged
     {
 
-        public List<Int32> GpioPins;
-        public List<GpioPin> Gpios;
+        public static List<Int32> GpioPins;
+        public static List<GpioPin> Gpios;
         public Hardware(Int32[] pins)
         {
-            GpioPins = new List<int>(pins);
-            Gpios = new List<GpioPin>();
+            if (GpioPins == null)
+            {
+                GpioPins = new List<int>(pins);
+                Gpios = new List<GpioPin>();
+            }
+            else
+            {
+                foreach(var pin in pins)
+                {
+                    GpioPins.Add(pin);
+                    Gpios.Add(InitGpioOutput(pin));
+                }
+            }
         }
 
         #region Controller
-        private GpioController gpiocontroller;
+        private static GpioController gpiocontroller;
         public GpioController GpioController
         {
             get
@@ -57,9 +68,10 @@ namespace HardwareViews.Base
             if (devicefamily != "Universal")
                 return false;
 
-            var controller = GpioController.GetDefault();
+            if(gpiocontroller==null)
+                gpiocontroller = GpioController.GetDefault();
 
-            if (controller == null)
+            if (gpiocontroller == null)
             {
                 if (Gpios != null)
                 {
@@ -74,7 +86,6 @@ namespace HardwareViews.Base
             {
                 Status = GpioStatus.Initialized;
                 await Task.Delay(200);
-                GpioController = controller;
                 Status = InitializeGpios();
                 await Task.Delay(200);
             }

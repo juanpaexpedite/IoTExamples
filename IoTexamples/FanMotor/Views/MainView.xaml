@@ -5,10 +5,10 @@
     xmlns:local="using:FanMotor.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-     xmlns:vm ="using:FanMotor.ViewModels"
+     xmlns:vm ="using:FanMotor.ViewHardwares"
     mc:Ignorable="d">
     <Page.DataContext>
-        <vm:MainViewModel/>
+        <vm:MainViewHardware/>
     </Page.DataContext>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
