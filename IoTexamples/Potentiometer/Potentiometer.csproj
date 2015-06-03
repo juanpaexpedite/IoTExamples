@@ -95,10 +95,13 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\GpioStatus.cs" />
+    <Compile Include="Common\SpiStatus.cs" />
     <Compile Include="Hardwares\Base\Hardware.cs" />
-    <Compile Include="Hardwares\FanMotorHardware.cs" />
-    <Compile Include="Hardwares\LedHardware.cs" />
+    <Compile Include="Hardwares\MoistureSensorHardware.cs" />
+    <Compile Include="Hardwares\TrimPotHardware.cs" />
+    <Compile Include="Models\Base\IAnalogDigitalConverter.cs" />
     <Compile Include="Models\Base\Model.cs" />
+    <Compile Include="Models\MCP3002.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewHardwares\Base\ViewHardware.cs" />
     <Compile Include="ViewHardwares\MainViewHardware.cs" />

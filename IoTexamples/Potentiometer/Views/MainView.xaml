@@ -5,7 +5,7 @@
     xmlns:local="using:FanMotor.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-     xmlns:vm ="using:FanMotor.ViewHardwares"
+     xmlns:vm ="using:Potentiometer.ViewHardwares"
     mc:Ignorable="d">
     <Page.DataContext>
         <vm:MainViewHardware/>
@@ -13,5 +13,12 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+        <StackPanel Orientation="Vertical" Margin="100,200,100,0" DataContext="{Binding Hardware}">
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding SpiDigitalValue}"/>
+            <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding SpiData}"/>
+            <ProgressBar Minimum="0" Maximum="100" Value="{Binding Humidity}" Height="60"/>
+            <ProgressBar Minimum="0" Maximum="100" Value="{Binding Level}" Height="60"/>
+        </StackPanel>
+        
     </Grid>
 </Page>

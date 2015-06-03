@@ -1,4 +1,7 @@
-﻿using FanMotor.Hardwares;
+﻿using Common;
+using Hardwares.Base;
+using Potentiometer.Hardwares;
+using Potentiometer.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,13 +14,21 @@ using ViewHardwares.Base;
 using Windows.UI;
 using Windows.UI.Xaml;
 
-namespace FanMotor.ViewHardwares
+namespace Potentiometer.ViewHardwares
 {
     public class MainViewHardware : ViewHardware
     {
         #region Hardware
-        public FanMotorHardware FanMotorHardware { get; set; }
-        public LedHardware LedHardware { get; set; }
+        private TrimPotHardware hardware;
+        public TrimPotHardware Hardware
+        {
+            get { return hardware; }
+            set
+            {
+                hardware = value;
+                NotifyPropertyChanged();
+            }
+        }
         #endregion
 
         public MainViewHardware()
@@ -27,32 +38,18 @@ namespace FanMotor.ViewHardwares
 
         private async void Initialize()
         {
-            FanMotorHardware = new FanMotorHardware(new int[] { 18, 23 });
+            Hardware = new TrimPotHardware();
 
-            if (await FanMotorHardware.InitializeComponent())
+            if (SpiStatus.Success == await Hardware.InitalizeSpi(new MCP3002(), 1))
             {
-                //Initialized FanMotorHardware
-                //Now I can initialize more hardware in the same RPi2
-
-                LedHardware = new LedHardware(new int[] { 25 });
-
-                //Because Hardware was initialized once I do not need to initialize again just the pin
-
-                FanMotorHardware.OnChanged += (s, f) =>
+                DispatcherTimer dt = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(500) };
+                dt.Tick += (s, e) =>
                 {
-                    if(f.FanMotorMode == FanMotorHardware.Modes.Stop)
-                    {
-                        LedHardware.TurnOff();
-                    }
-                    else
-                    {
-                        LedHardware.TurnOn();
-                    }
+                    Hardware.ReadSpi();
+                    Hardware.Update();
                 };
-
-                //To be pure HVVH you should extract the Specific Method to here but I wanted to show how to implement
-                //one event and read from here
-                FanMotorHardware.Specific();
+                dt.Start();
+             
             }
         }
     }
