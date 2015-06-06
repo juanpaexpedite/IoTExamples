@@ -6,6 +6,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
      xmlns:vm ="using:Potentiometer.ViewHardwares"
+    xmlns:controls="using:Potentiometer.Views.Controls"
+    FontFamily="Segoe UI" FontSize="22" FontWeight="Light"
     mc:Ignorable="d">
     <Page.DataContext>
         <vm:MainViewHardware/>
@@ -13,12 +15,51 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-        <StackPanel Orientation="Vertical" Margin="100,200,100,0" DataContext="{Binding Hardware}">
-            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding SpiDigitalValue}"/>
-            <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding SpiData}"/>
-            <ProgressBar Minimum="0" Maximum="100" Value="{Binding Humidity}" Height="60"/>
-            <ProgressBar Minimum="0" Maximum="100" Value="{Binding Level}" Height="60"/>
+        <!--#region Rows and Columns-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="200"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.3333*"/>
+            <ColumnDefinition Width="0.3333*"/>
+            <ColumnDefinition Width="0.3333*"/>
+        </Grid.ColumnDefinitions>
+        <!--#endregion-->
+        
+        
+        <!--#region Channels-->
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.ColumnSpan="3">
+            <TextBlock Text="Channel:"/>
+            <TextBlock Margin="8,0,0,0" Text="{Binding MainHardware.SpiChannel}"/>
         </StackPanel>
+
+        <StackPanel HorizontalAlignment="Center"  Orientation="Horizontal" Grid.Row="1">
+            <TextBlock Text="CH0:"/>
+            <TextBlock Margin="8,0,0,0" Text="{Binding CH0}"/>
+        </StackPanel>
+
+        <StackPanel HorizontalAlignment="Center"  Orientation="Horizontal" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
+            <TextBlock Text="CH1:"/>
+            <TextBlock Margin="8,0,0,0" Text="{Binding CH1}"/>
+        </StackPanel>
+        <!--#endregion-->
+        
+        <!--#region Controls-->
+        <controls:Potentiometer Grid.Row="3" HorizontalAlignment="Center" Minimum="0" Maximum="10" Resistance="{Binding Resistance}"/>
+        <controls:Moisture Grid.Column="1"  Grid.Row="3" HorizontalAlignment="Center" Minimum="0" Maximum="100" Level="{Binding Humidity}"/>
+        <controls:Water Grid.Column="2"  Grid.Row="3" HorizontalAlignment="Center" Minimum="0" Maximum="100" Level="{Binding Level}"/>
+        <!--#endregion-->
+        
+        <!--#region Progress Bar-->
+        <ProgressBar VerticalAlignment="Top" Grid.Row="4"  Foreground="#F34097"  Width="300" Minimum="0" HorizontalAlignment="Center" Maximum="10" Value="{Binding Resistance}" Height="24"/>
+        <ProgressBar VerticalAlignment="Top" Grid.Row="4" Foreground="#FF9443" Width="300" Grid.Column="1" HorizontalAlignment="Center"  Minimum="0" Maximum="100" Value="{Binding Humidity}" Height="24"/>
+        <ProgressBar VerticalAlignment="Top" Grid.Row="4" Foreground="#43B7FF"  Width="300" Grid.Column="2" HorizontalAlignment="Center"  Minimum="0" Maximum="100" Value="{Binding Level}" Height="24"/>
+        <!--#endregion-->
         
     </Grid>
 </Page>
