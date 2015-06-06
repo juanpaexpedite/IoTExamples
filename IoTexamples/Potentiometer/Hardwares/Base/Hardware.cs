@@ -18,6 +18,11 @@ namespace Hardwares.Base
 {
     public class Hardware : INotifyPropertyChanged
     {
+        public Hardware() : this(null)
+        {
+
+        }
+
         public Hardware(Int32[] pins)
         {
             if (GpioPins == null)
@@ -184,6 +189,22 @@ namespace Hardwares.Base
         }
         #endregion
 
+        #region SpiChannel
+        private int spichannel;
+
+        public int SpiChannel
+        {
+            get { return spichannel; }
+            set
+            {
+                spichannel = value;
+                if (ADConverter != null)
+                    ADConverter.Channel = spichannel;
+                NotifyPropertyChanged();
+            }
+        }
+        #endregion
+
         #region SpiDigitalValue
         private int spidigitalvalue;
 
@@ -226,7 +247,6 @@ namespace Hardwares.Base
             return SpiDigitalValue;
 
         }
-        
         
         //private int convertToInt(byte[] data)
         //{

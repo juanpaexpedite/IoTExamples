@@ -10,10 +10,9 @@ namespace Potentiometer.Models
 {
     public class MCP3002 : IAnalogDigitalConverter
     {
-        public Int32 ChipSelect0 => 0;
-        public Int32 ChipSelect1 => 1;
+        public int[] ChipSelect => new int[] { 0, 1 };
 
-        public SpiConnectionSettings SpiConnectionSettings => new SpiConnectionSettings(ChipSelect0)
+        public SpiConnectionSettings SpiConnectionSettings => new SpiConnectionSettings(ChipSelect[0])
             {
                 ClockFrequency = 500000,
                 Mode = SpiMode.Mode0

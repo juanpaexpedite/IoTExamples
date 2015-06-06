@@ -25,6 +25,7 @@ namespace Potentiometer.Hardwares
             Humidity = DigitalToHumidity(SpiDigitalValue);
             Level = DigitalToLevel(SpiDigitalValue);
         }
+
         //public void ReadSpi()
         //{
         //    SpiDevice.TransferFullDuplex(WriteBuffer, ReadBuffer);

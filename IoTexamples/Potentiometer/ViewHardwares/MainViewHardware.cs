@@ -18,14 +18,14 @@ namespace Potentiometer.ViewHardwares
 {
     public class MainViewHardware : ViewHardware
     {
-        #region Hardware
-        private TrimPotHardware hardware;
-        public TrimPotHardware Hardware
+        #region MainHardware
+        private Hardware mainhardware;
+        public Hardware MainHardware
         {
-            get { return hardware; }
+            get { return mainhardware; }
             set
             {
-                hardware = value;
+                mainhardware = value;
                 NotifyPropertyChanged();
             }
         }
@@ -38,19 +38,143 @@ namespace Potentiometer.ViewHardwares
 
         private async void Initialize()
         {
-            Hardware = new TrimPotHardware();
+            MainHardware = new Hardware();
 
-            if (SpiStatus.Success == await Hardware.InitalizeSpi(new MCP3002(), 1))
+            if (SpiStatus.Success == await MainHardware.InitalizeSpi(new MCP3002(), 0))
             {
                 DispatcherTimer dt = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(500) };
                 dt.Tick += (s, e) =>
                 {
-                    Hardware.ReadSpi();
-                    Hardware.Update();
+                    MainHardware.ReadSpi();
+                    Update();
+
+                    MainHardware.SpiChannel = MainHardware.SpiChannel== 0 ? 1 : 0;
                 };
                 dt.Start();
              
             }
         }
+
+        private void Update()
+        {
+            if(MainHardware.ADConverter.Channel == 0)
+            {
+                UpdateResistance(MainHardware.SpiDigitalValue);
+
+            }
+            else if (MainHardware.ADConverter.Channel == 1)
+            {
+                UpdateMoisture(MainHardware.SpiDigitalValue);
+            }
+        }
+
+        #region Resistance
+        private double ch0;
+        public double CH0
+        {
+            get { return ch0; }
+            set
+            {
+                ch0 = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private double resistance;
+
+        public double Resistance
+        {
+            get { return resistance; }
+            set
+            {
+                resistance = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public void UpdateResistance(double value)
+        {
+            CH0 = value;
+            Resistance = DigitalToResistance(value);
+        }
+
+        private double DigitalToResistance(double value)
+        {
+            return value * 10.0 / 1024.0;
+
+        }
+        #endregion
+
+        #region Moisture Sensor
+        
+
+        private double ch1;
+        public double CH1
+        {
+            get { return ch1; }
+            set
+            {
+                ch1 = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private double humidity;
+
+        public double Humidity
+        {
+            get { return humidity; }
+            set
+            {
+                humidity = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private double DigitalToHumidity(double value)
+        {
+            if (value > 340)
+                return 100;
+            else
+                return value * 100 / 340;
+
+        }
+
+        private double level;
+
+        public double Level
+        {
+            get { return level; }
+            set
+            {
+                level = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private double DigitalToLevel(double value)
+        {
+            double min = 500.0;
+            double max = 715.0;
+
+            if (value < min)
+                return 0;
+            else
+            {
+                double b = 100.0 / (1.0 - max / min);
+                double a = -b / min;
+
+
+                return value * a + b;
+            }
+        }
+
+        public void UpdateMoisture(double value)
+        {
+            CH1 = value;
+            Humidity = DigitalToHumidity(value);
+            Level = DigitalToLevel(value);
+        }
+        #endregion
     }
 }

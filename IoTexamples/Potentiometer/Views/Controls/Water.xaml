@@ -1,0 +1,30 @@
+﻿<UserControl
+    x:Class="Potentiometer.Views.Controls.Water"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Potentiometer.Views.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <TextBlock x:Name="Header" HorizontalAlignment="Center"  Text="0 %" Margin="0,0,0,8"/>
+
+        <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <Path Width="93.3735" Height="120" Canvas.Left="1.27415"  Stretch="Fill" Fill="#FFFFFF" Data="F1 M 31.575,7.62939e-006C 16.8,7.62939e-006 5.1,14.4 4.95,32.25L 4.875,53.775C 0,57.225 0.0749999,61.8 5.1,65.4L 4.95,87.75C 4.875,105.6 16.8,120 31.575,120L 64.125,120C 78.9,120 90.75,105.6 90.75,87.75L 90.75,64.8C 95.25,62.925 96.6,57 90.75,54.15L 90.75,32.25C 90.75,14.4 78.9,7.62939e-006 64.125,7.62939e-006L 31.575,7.62939e-006 Z M 44.25,6.075C 52.275,6.075 60.225,5.925 68.1,6.675C 77.1,9.22501 83.175,18.375 83.925,27.375C 84.675,49.05 84.075,70.725 84.3,92.4C 82.8,101.1 77.55,110.4 68.625,113.175C 56.55,114.225 44.175,113.775 32.1,113.55C 25.575,114.15 19.8,109.95 16.275,104.85C 12.6,99.9 11.175,93.825 11.55,87.825C 11.475,67.95 10.875,48.075 11.625,28.2C 12.375,19.425 17.7,10.35 26.175,7.12501C 32.1,5.7 38.175,6.37501 44.25,6.075 Z "/>
+            <Path x:Name="Shape" Width="60.984" Height="95.2143" Canvas.Left="17.4836" Canvas.Top="12.3743" Stretch="Fill" Fill="#43B7FF" Data="F1 M 27.3,13.2C 20.85,16.725 17.1,24.375 17.7,31.425C 17.475,51.525 17.325,72.3 17.775,92.4C 18.45,98.85 22.875,105.525 29.25,107.4C 41.85,107.775 54.45,107.475 67.05,107.475C 74.4,104.175 78.675,95.85 78.375,87.975C 78.675,67.725 78.15,47.4 78.15,27.075C 76.5,20.775 72.675,13.65 65.7,12.45C 53.325,12.525 40.8,12.15 28.575,12.6L 27.3,13.2 Z ">
+                <Path.Clip >
+                    <RectangleGeometry  x:Name="Clip" Rect="0,0,95.2143,0"/>
+                </Path.Clip>
+            </Path>
+
+        </Grid>
+
+    </Grid>
+</UserControl>

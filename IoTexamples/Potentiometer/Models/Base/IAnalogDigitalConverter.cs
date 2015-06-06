@@ -18,9 +18,7 @@ namespace Potentiometer.Models.Base
         byte[] ReadBuffer { get; set; }
 
         SpiConnectionSettings SpiConnectionSettings { get; }
+        int[] ChipSelect { get; }
 
-        Int32 ChipSelect0 { get; }
-
-        Int32 ChipSelect1 { get; }
     }
 }
