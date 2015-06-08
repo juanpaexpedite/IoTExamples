@@ -178,6 +178,12 @@ namespace Hardwares.Base
         {
             ADConverter = adc;
             adc.Channel = Channel;
+
+            var devicefamily = GetForCurrentView().QualifierValues["DeviceFamily"];
+            if (devicefamily != "Universal")
+                return SpiStatus.NoSPI;
+
+           
             string spiAqs = SpiDevice.GetDeviceSelector(Controllers[0]);
             var deviceInfo = await DeviceInformation.FindAllAsync(spiAqs);
             SpiDevice = await SpiDevice.FromIdAsync(deviceInfo[0].Id,adc.SpiConnectionSettings);
@@ -239,6 +245,7 @@ namespace Hardwares.Base
         }
         #endregion
 
+        #region Read SPI
         public int ReadSpi()
         {
             SpiDevice.TransferFullDuplex(adconverter.WriteBuffer, adconverter.ReadBuffer);
@@ -247,14 +254,7 @@ namespace Hardwares.Base
             return SpiDigitalValue;
 
         }
-        
-        //private int convertToInt(byte[] data)
-        //{
-        //    int result = data[0];
-        //    result <<= 8;
-        //    result += data[1];
-        //    return result;
-        //}
+        #endregion
 
 
         #region NotifyPropertyChanged
@@ -269,63 +269,5 @@ namespace Hardwares.Base
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
     }
-
-    //public enum ADCs
-    //{
-    //    MCP3002,
-    //    MCP3008
-    //}
-
-    //public class RPI2SPISettings
-    //{
-       
-    //    private static Int32 ChipSelect0 => 0;
-    //    private static Int32 ChipSelect1 => 1;
-
-    //    public static SpiConnectionSettings MCP3002_ChipSelect0
-    //    {
-    //        get
-    //        {
-    //            return new SpiConnectionSettings(ChipSelect0)
-    //            {
-    //                ClockFrequency = 500000,
-    //                Mode = SpiMode.Mode0
-    //            };
-    //        }
-    //    }
-    //}
-
-    //public class RPI2SPIDevices
-    //{
-    //    private static string Controller0 => "SPI0";
-    //    private static string Controller1 => "SPI1";
-
-    //    public static async Task<SpiDevice> MCP3002Channel0()
-    //    {
-    //        try
-    //        {
-    //            string spiAqs = SpiDevice.GetDeviceSelector(Controller0);
-    //            var deviceInfo = await DeviceInformation.FindAllAsync(spiAqs);
-    //            return await SpiDevice.FromIdAsync(deviceInfo[0].Id, RPI2SPISettings.MCP3002_ChipSelect0);
-    //        }
-    //        catch (Exception ex)
-    //        {
-    //            throw new Exception("SPI Initialization Failed", ex);
-    //        }
-    //    }
-
-    //    public static async Task<SpiDevice> MCP3002Channel1()
-    //    {
-    //        try
-    //        {
-    //            string spiAqs = SpiDevice.GetDeviceSelector(Controller0);
-    //            var deviceInfo = await DeviceInformation.FindAllAsync(spiAqs);
-    //            return await SpiDevice.FromIdAsync(deviceInfo[0].Id, RPI2SPISettings.MCP3002_ChipSelect0);
-    //        }
-    //        catch (Exception ex)
-    //        {
-    //            throw new Exception("SPI Initialization Failed", ex);
-    //        }
-    //    }
-    //}
+  
 }

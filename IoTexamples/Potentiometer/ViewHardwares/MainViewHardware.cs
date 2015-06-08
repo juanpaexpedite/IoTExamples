@@ -1,6 +1,5 @@
 ﻿using Common;
 using Hardwares.Base;
-using Potentiometer.Hardwares;
 using Potentiometer.Models;
 using System;
 using System.Collections.Generic;
@@ -52,6 +51,15 @@ namespace Potentiometer.ViewHardwares
                 };
                 dt.Start();
              
+            }
+            else
+            {
+                CH0 = 435;
+                Resistance = 4.248;
+                CH1 = 679;
+                Humidity = 100;
+                //Level = 83.256;
+                
             }
         }
 
@@ -131,6 +139,40 @@ namespace Potentiometer.ViewHardwares
             }
         }
 
+
+        public void UpdateMoisture(double value)
+        {
+            CH1 = value;
+            Humidity = DigitalToHumidity(value);
+        }
+
+        private double DigitalToHumidity(double value)
+        {
+            if (value > 715)
+                return 100;
+            else
+                return value * 100 / 715;
+        }
+        #endregion
+    }
+
+    /// <summary>
+    /// The following is the calibration when is used with wet materials (towels) or directly with water
+    /// </summary>
+    public class MoisturewithWaterandWet
+    {
+        private double humidity;
+
+        public double Humidity
+        {
+            get { return humidity; }
+            set
+            {
+                humidity = value;
+                //NotifyPropertyChanged();
+            }
+        }
+
         private double DigitalToHumidity(double value)
         {
             if (value > 340)
@@ -148,7 +190,7 @@ namespace Potentiometer.ViewHardwares
             set
             {
                 level = value;
-                NotifyPropertyChanged();
+                //NotifyPropertyChanged();
             }
         }
 
@@ -168,13 +210,5 @@ namespace Potentiometer.ViewHardwares
                 return value * a + b;
             }
         }
-
-        public void UpdateMoisture(double value)
-        {
-            CH1 = value;
-            Humidity = DigitalToHumidity(value);
-            Level = DigitalToLevel(value);
-        }
-        #endregion
     }
 }

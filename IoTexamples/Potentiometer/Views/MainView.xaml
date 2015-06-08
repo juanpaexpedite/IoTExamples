@@ -13,7 +13,7 @@
         <vm:MainViewHardware/>
     </Page.DataContext>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid VerticalAlignment="Bottom" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
         <!--#region Rows and Columns-->
         <Grid.RowDefinitions>
