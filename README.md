@@ -28,3 +28,9 @@ In this case you can connect directly to the raspberry Pi 2 this L9110 (controll
 
 I have improved the code to implement Hardware HVVH pattern, in order to make a base to implement scalable hardware views
 
+
+<a href="http://expediteapps.com/blog/sensingworldw10iot/">Post </a>
+
+<img src="http://expediteapps.com/blog/wp-content/uploads/2015/06/SPI.jpg" />
+
+Now the Hardware implementation has the SPI device and is really quick and easy to add to your project and keep that internally.
