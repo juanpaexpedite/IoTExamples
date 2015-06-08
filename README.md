@@ -28,6 +28,7 @@ In this case you can connect directly to the raspberry Pi 2 this L9110 (controll
 
 I have improved the code to implement Hardware HVVH pattern, in order to make a base to implement scalable hardware views
 
+<b>Potentiometer and Moisture Sensor with SPI</b>
 
 <a href="http://expediteapps.com/blog/sensingworldw10iot/">Post </a>
 
