@@ -1,0 +1,61 @@
+﻿using IoT.Models.Base;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Windows.Devices.Spi;
+
+namespace IoT.Models
+{
+    public class MCP3002 : IAnalogDigitalConverter
+    {
+        public int[] ChipSelects => new int[] { 0, 1 };
+
+        public int ChipSelect { get; set; }
+
+
+        public SpiConnectionSettings ConnectionSettings => new SpiConnectionSettings(ChipSelects[ChipSelect])
+        {
+            ClockFrequency = 500000,
+            Mode = SpiMode.Mode0
+        };
+
+
+        public Int32 Channel { get; set; }
+
+        private byte[] readbuffer = new byte[2];
+        public byte[] ReadBuffer
+        {
+            get { return readbuffer; }
+            set
+            {
+                readbuffer = value;
+            }
+        }
+
+        public byte[] WriteBuffer
+        {
+            get
+            {
+                switch (Channel)
+                {
+                    case 0:
+                        return new byte[2] { 0x68, 0x00 };
+                    case 1:
+                        return new byte[2] { 0x70, 0x00 };
+                    default:
+                        return new byte[2] { 0x68, 0x00 };
+                }
+            }
+        }
+
+        public Int32 Convert(byte[] bytes)
+        {
+            int result = bytes[0];
+            result <<= 8; // == result * 2^8
+            result += bytes[1]; // 0 - 255
+            return result; //min = 0, max = 1023
+        }
+    }
+}

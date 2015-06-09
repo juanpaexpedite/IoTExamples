@@ -1,0 +1,23 @@
+﻿<UserControl
+    x:Class="SPIChildsQuick.Views.Controls.Thermometer"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SPIChildsQuick.Views.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Width="200" Height="168">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <TextBlock x:Name="Header" HorizontalAlignment="Center"  Text="0 ºC" Margin="0,0,0,8"/>
+        <Path Grid.Row="1" Width="59.7906" Height="128.146" Canvas.Left="11.8858" Canvas.Top="11.8858" Stretch="Fill" StrokeThickness="7.92389" StrokeMiterLimit="2.75" Stroke="#FFFFFFFF" Data="F1 M 34.8176,15.8478C 29.775,15.8478 25.6929,19.4497 25.6929,23.8519L 25.6929,89.8059C 19.5297,94.6884 15.8478,102.212 15.8478,110.136C 15.8478,124.464 27.4538,136.07 41.7812,136.07C 56.1085,136.07 67.7145,124.464 67.7145,110.136C 67.7145,102.212 64.1127,94.7685 57.8694,89.8059L 57.8694,23.8519C 57.8694,19.4497 53.7873,15.8478 48.7447,15.8478L 34.8176,15.8478 Z "/>
+        <Path x:Name="Shape" Grid.Row="1" Width="30.6774" Height="99.0311" Canvas.Left="26.464" Canvas.Top="26.4933" Stretch="Fill" Fill="#8AF743FF" Data="F1 M 36.8186,26.4933C 35.618,26.8935 36.4984,29.2147 36.1783,30.4953C 36.0182,50.7458 36.1783,71.2363 36.0982,91.5668C 35.1377,94.2082 34.1772,96.8495 31.776,98.6105C 26.7334,102.693 25.1326,110.056 27.6139,116.059C 30.4153,123.183 38.8997,127.185 46.1834,124.864C 52.9069,122.783 58.1096,115.739 56.989,108.536C 56.909,103.333 53.067,99.4909 49.4651,96.2092C 48.3445,93.6479 47.0639,91.0866 47.5441,88.2051C 47.5441,67.7145 47.4641,47.1439 47.384,26.5733C 43.8622,26.5733 40.3404,26.4933 36.8186,26.4933 Z ">
+            <Path.Clip>
+                <RectangleGeometry x:Name="Clip" Rect="0,0,30.6774,0"/>
+            </Path.Clip>
+        </Path>
+    </Grid>
+</UserControl>

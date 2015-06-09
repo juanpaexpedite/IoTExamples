@@ -5,7 +5,7 @@
     xmlns:local="using:FanMotor.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-     xmlns:vm ="using:Potentiometer.ViewHardwares"
+    xmlns:vm ="using:Potentiometer.ViewHardwares"
     xmlns:controls="using:Potentiometer.Views.Controls"
     FontFamily="Segoe UI" FontSize="22" FontWeight="Light"
     mc:Ignorable="d">
