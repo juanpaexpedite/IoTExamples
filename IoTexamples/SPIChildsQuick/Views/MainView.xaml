@@ -1,12 +1,12 @@
 ﻿<Page
-    x:Class="SPIChildsQuick.Views.MainView"
+    x:Class="SPIThermometer.Views.MainView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:SPIChildsQuick.Views"
+    xmlns:local="using:SPIThermometer.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:vm ="using:SPIChildsQuick.ViewHardwares"
-    xmlns:controls="using:SPIChildsQuick.Views.Controls"
+    xmlns:vm ="using:SPIThermometer.ViewHardwares"
+    xmlns:controls="using:SPIThermometer.Views.Controls"
      FontFamily="Segoe UI" FontSize="22" FontWeight="Light"
     mc:Ignorable="d">
     <Page.DataContext>
@@ -31,33 +31,41 @@
         <!--#endregion-->
 
 
-        <!--#region Channels-->
+        <!--#region ChipSelect & Channel-->
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.ColumnSpan="3">
             <TextBlock Text="ChipSelect:"/>
             <TextBlock Margin="8,0,0,0" Text="{Binding MainHardware.SpiChipSelect}"/>
             <TextBlock Margin="8,0,0,0" Text="Channel:"/>
             <TextBlock Margin="8,0,0,0" Text="{Binding MainHardware.SpiChannel}"/>
         </StackPanel>
+        <!--#endregion-->
 
+        <!--#region CS CH Read-->
         <StackPanel HorizontalAlignment="Center"  Orientation="Horizontal" Grid.Row="1">
             <TextBlock Text="CS0CH0:"/>
             <TextBlock Margin="8,0,0,0" Text="{Binding CS0CH0}"/>
         </StackPanel>
 
-        <!--<StackPanel HorizontalAlignment="Center"  Orientation="Horizontal" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
+        <StackPanel HorizontalAlignment="Center"  Orientation="Horizontal" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
             <TextBlock Text="CS1CH0:"/>
             <TextBlock Margin="8,0,0,0" Text="{Binding CS1CH0}"/>
-        </StackPanel>-->
+        </StackPanel>
         <!--#endregion-->
 
         <!--#region Controls-->
-        <controls:Potentiometer Grid.Row="3" HorizontalAlignment="Center" Minimum="0" Maximum="4000" Resistance="{Binding FirstResistance}"/>
-        <controls:Thermometer Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center" Minimum="-10" Maximum="100" Value="{Binding Temperature}"/>
+        <controls:Potentiometer  Grid.Row="2" HorizontalAlignment="Center" Minimum="0" Maximum="4000" Resistance="{Binding FirstResistance}"/>
+        <controls:Potentiometer Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" Minimum="0" Maximum="400000" Resistance="{Binding SecondResistance}"/>
+        <!--#endregion-->
+
+        <!--#region Controls-->
+        <controls:Thermometer  Grid.Row="3" HorizontalAlignment="Center" Minimum="-10" Maximum="100" Value="{Binding Temperature}"/>
+        <controls:Lightness Grid.Column="1"  Grid.Row="3" HorizontalAlignment="Center" Minimum="0" Maximum="0.3" Value="{Binding Illuminance}"/>
+        
         <!--#endregion-->
 
         <!--#region Progress Bar-->
-        <ProgressBar VerticalAlignment="Top" Grid.Row="4"  Foreground="#F34097"  Width="300" Minimum="0" HorizontalAlignment="Center" Maximum="4000" Value="{Binding FirstResistance}" Height="24"/>
-        <ProgressBar VerticalAlignment="Top" Grid.Row="4" Foreground="#FF9443" Width="300" Grid.Column="1" HorizontalAlignment="Center"  Minimum="-10" Maximum="100" Value="{Binding Temperature}" Height="24"/>
+        <ProgressBar VerticalAlignment="Top" Grid.Row="4" Foreground="#FF9443" Width="300"  HorizontalAlignment="Center"  Minimum="-10" Maximum="50" Value="{Binding Temperature}" Height="24"/>
+        <ProgressBar VerticalAlignment="Top" Grid.Row="4"  Foreground="#F34097"  Width="300" Grid.Column="1" Minimum="0" HorizontalAlignment="Center" Maximum="0.3" Value="{Binding Illuminance}" Height="24"/>
         <!--#endregion-->
 
     </Grid>

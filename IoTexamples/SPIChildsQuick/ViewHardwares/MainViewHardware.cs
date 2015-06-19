@@ -15,7 +15,7 @@ using Windows.Devices.Gpio;
 using Windows.UI;
 using Windows.UI.Xaml;
 
-namespace SPIChildsQuick.ViewHardwares
+namespace SPIThermometer.ViewHardwares
 {
     public class MainViewHardware : ViewHardware
     {
@@ -43,7 +43,9 @@ namespace SPIChildsQuick.ViewHardwares
 
             if (await MainHardware.InitializeGpioController() )
             {
-                if (SpiStatus.Success == await MainHardware.InitalizeSpi(new MCP3002(), 0))
+                if (SpiStatus.Success == await MainHardware.InitalizeSpi(new MCP3002(), 0)
+                    && SpiStatus.Success == await MainHardware.InitalizeSpi(new MCP3002(), 1)
+                    )
                 {
                     Loop();
                 }
@@ -71,11 +73,12 @@ namespace SPIChildsQuick.ViewHardwares
             MainHardware.ReadSpi(MainHardware.SpiChipSelect);
             Update();
 
-            //MainHardware.SpiChipSelect = MainHardware.SpiChipSelect == 0 ? 1 : 0;
+            
+            MainHardware.SpiChipSelect = MainHardware.SpiChipSelect == 0 ? 1 : 0;
 
-            MainHardware.SpiDevices[0].ConnectionSettings.ChipSelectLine = MainHardware.SpiChipSelect;
+            //MainHardware.SpiDevices[0].ConnectionSettings.ChipSelectLine = MainHardware.SpiChipSelect;
 
-            await Task.Delay(1000);
+            await Task.Delay(100);
             Loop();
         }
 
@@ -182,11 +185,37 @@ namespace SPIChildsQuick.ViewHardwares
         {
             CS1CH0 = value;
             SecondResistance = DigitalToSecondResistance(value);
+            Illuminance = ResistanceToLightness(SecondResistance);
         }
 
         private double DigitalToSecondResistance(double value)
         {
-            return value * 100.0 / 1024.0;
+            var Vr = value * 5 / 1024;
+
+            var I = Vr / 1000;
+            var Vt = 5 - Vr;
+
+            var Rt = Vt / I;
+
+            return Rt;
+        }
+
+        private double illuminance;
+        public double Illuminance
+        {
+            get { return illuminance; }
+            set
+            {
+                illuminance = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public Photoresistor Photoresistor = new Photoresistor();
+        private double ResistanceToLightness(double value)
+        {
+            Photoresistor.Resistance = value;
+            return Photoresistor.GetIlluminance();
         }
         #endregion
     }

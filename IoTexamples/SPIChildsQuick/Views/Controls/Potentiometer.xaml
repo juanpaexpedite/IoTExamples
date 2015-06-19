@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="SPIChildsQuick.Views.Controls.Potentiometer"
+    x:Class="SPIThermometer.Views.Controls.Potentiometer"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Potentiometer.Views.Controls"

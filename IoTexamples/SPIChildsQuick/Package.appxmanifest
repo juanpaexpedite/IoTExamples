@@ -14,7 +14,7 @@
   <mp:PhoneIdentity PhoneProductId="6ad37ac7-0101-4e0f-9ef8-b90494ddca61" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>SPIChildsQuick</DisplayName>
+    <DisplayName>SPIThermometer</DisplayName>
     <PublisherDisplayName>JuanPablo</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -30,12 +30,12 @@
   <Applications>
     <Application Id="App"
       Executable="$targetnametoken$.exe"
-      EntryPoint="SPIChildsQuick.App">
+      EntryPoint="SPIThermometer.App">
       <uap:VisualElements
-        DisplayName="SPIChildsQuick"
+        DisplayName="SPIThermometer"
         Square150x150Logo="Assets\Logo.png"
         Square44x44Logo="Assets\SmallLogo.png"
-        Description="SPIChildsQuick"
+        Description="SPIThermometer"
         BackgroundColor="#464646">
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>

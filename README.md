@@ -23,7 +23,6 @@ Using a capacitor and two GPIOS you can measure the changes of the resistance of
 
 <img src="http://expediteapps.com/blog/wp-content/uploads/2015/05/fanmotor.jpg" />
 
-
 In this case you can connect directly to the raspberry Pi 2 this L9110 (controller chip) Fan Motor and make the motor forward, reverse and stop just by setting GPIOs high and low
 
 I have improved the code to implement Hardware HVVH pattern, in order to make a base to implement scalable hardware views
@@ -35,3 +34,11 @@ I have improved the code to implement Hardware HVVH pattern, in order to make a 
 <img src="http://expediteapps.com/blog/wp-content/uploads/2015/06/SPI.jpg" />
 
 Now the Hardware implementation has the SPI device and is really quick and easy to add to your project and keep that internally.
+
+<b>Remote Relays</b>
+
+<a href="http://expediteapps.com/blog/lucesremotas/">Post (spanish)</a>
+
+<img src="http://expediteapps.com/blog/wp-content/uploads/2015/06/relaycircuit.png" />
+
+In this case, I have implemented a REST Server, a REST client, and all the logic to switch bulbs with a relay and its driver.

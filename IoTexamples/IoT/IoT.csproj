@@ -109,18 +109,34 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Clients\RestClient.cs" />
+    <Compile Include="Common\Families.cs" />
     <Compile Include="Common\GpioStatus.cs" />
     <Compile Include="Common\SpiStatus.cs" />
     <Compile Include="Hardwares\Base\Hardware.cs" />
     <Compile Include="Models\Base\IAnalogDigitalConverter.cs" />
     <Compile Include="Models\Base\Model.cs" />
     <Compile Include="Models\MCP3002.cs" />
+    <Compile Include="Models\Photoresistor.cs" />
     <Compile Include="Models\PotentiometerModel.cs" />
+    <Compile Include="Models\Relay.cs" />
     <Compile Include="Models\Thermistor1K25C.cs" />
+    <Compile Include="Models\UltrasonicSensor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Servers\RestServer.cs" />
+    <Compile Include="Services\Base\IIotService.cs" />
+    <Compile Include="Services\NetworkService.cs" />
+    <Compile Include="Services\SystemService.cs" />
     <Compile Include="ViewHardwares\Base\ViewHardware.cs" />
+    <Compile Include="ViewHardwares\Converters\BoolVisibilityConverter.cs" />
+    <Compile Include="ViewHardwares\Input\Command.cs" />
+    <Compile Include="ViewHardwares\Triggers\DeviceTrigger.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\netcore45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Numerics.Vectors, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Numerics.Vectors.4.0.0\lib\win8\System.Numerics.Vectors.dll</HintPath>
       <Private>True</Private>

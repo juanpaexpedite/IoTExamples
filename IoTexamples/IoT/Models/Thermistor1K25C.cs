@@ -10,9 +10,7 @@ namespace IoT.Models
     {
         public double Resistance;
 
-        private double A;
-        private double B;
-        private double C;
+        private double A, B, C;
 
         public Thermistor1K25C(double a = 0.00288301, double b = -0.00002028, double c = 0.00000190)
         {

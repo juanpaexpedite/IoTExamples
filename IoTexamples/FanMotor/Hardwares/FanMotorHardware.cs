@@ -29,13 +29,15 @@ namespace FanMotor.Hardwares
         public void Specific()
         {
             //Long await
-            Loop();
+            //Loop();
 
             //Mininum await
             //SoftwarePWMLoop();
 
             //Thread with for wait
             //ThreadLoop();
+
+            ForPWMLoop();
         }
 
         //Core of the thread Loop

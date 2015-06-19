@@ -15,7 +15,7 @@ using Windows.UI.Xaml.Navigation;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
-namespace SPIChildsQuick.Views.Controls
+namespace SPIThermometer.Views.Controls
 {
     public sealed partial class Thermometer : UserControl
     {

@@ -17,6 +17,24 @@ namespace IoT.Hardwares.Base
 {
     public class Hardware : INotifyPropertyChanged
     {
+        
+        //public static Hardware GetDefault()
+        //{
+        //    if (currenthardware == null)
+        //        currenthardware = new Hardware();
+
+        //    return currenthardware;
+        //}
+
+        //private static Hardware currenthardware;
+        //public static Hardware GetDefault(Int32[] pins)
+        //{
+        //    if(currenthardware == null)
+        //     currenthardware = new Hardware(pins);
+
+        //    return currenthardware;
+        //}
+
         public Hardware() : this(null)
         {
 
@@ -125,7 +143,7 @@ namespace IoT.Hardwares.Base
         {
             var pin = GpioController.OpenPin(PIN);
             pin.SetDriveMode(GpioPinDriveMode.Output);
-            pin.Write(GpioPinValue.Low);
+            //pin.Write(GpioPinValue.Low);
 
             return pin;
         }
@@ -183,7 +201,6 @@ namespace IoT.Hardwares.Base
             if (devicefamily != "Universal")
                 return SpiStatus.NoSPI;
 
-           
             string spiAqs = SpiDevice.GetDeviceSelector(Controllers[0]);
             var deviceInfo = await DeviceInformation.FindAllAsync(spiAqs);
             var newSpiDevice = await SpiDevice.FromIdAsync(deviceInfo[0].Id,adc.ConnectionSettings);
@@ -273,7 +290,7 @@ namespace IoT.Hardwares.Base
         #region Read SPI
         public int ReadSpi(int spidevice =0)
         {
-            SpiDevices[0].TransferFullDuplex(adconverter.WriteBuffer, adconverter.ReadBuffer);
+            SpiDevices[spidevice].TransferFullDuplex(adconverter.WriteBuffer, adconverter.ReadBuffer);
             SpiData = $"{adconverter.ReadBuffer[0]},{adconverter.ReadBuffer[1]}";
             SpiDigitalValue = adconverter.Convert(adconverter.ReadBuffer);
             return SpiDigitalValue;

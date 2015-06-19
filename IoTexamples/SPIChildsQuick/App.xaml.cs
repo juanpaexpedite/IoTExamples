@@ -1,4 +1,4 @@
-﻿using SPIChildsQuick.Views;
+﻿using SPIThermometer.Views;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -18,7 +18,7 @@ using Windows.UI.Xaml.Navigation;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=402347&clcid=0x409
 
-namespace SPIChildsQuick
+namespace SPIThermometer
 {
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
