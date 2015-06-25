@@ -72,7 +72,7 @@ namespace TestingSDCard
             
             var path =await DataLoggerService.CreateDatabase("db.dat");
 
-            var connection = new SQLite.Net.SQLiteConnection(new SQLitePlatformWinRT(), "E:\\db.dat");
+            var connection = new SQLite.Net.SQLiteConnection(new SQLitePlatformWinRT(), path);
 
         }
 
